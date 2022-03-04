@@ -1,0 +1,69 @@
+#include<iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node* next = NULL;
+    
+};
+void printll(node* head)
+{
+      node* ptr = head;
+      cout<<"\nData in linked list : \n";
+      while(ptr!= NULL){
+          cout<<ptr->data<<"-->";
+          ptr = ptr->next;
+      } 
+}
+
+node* insertAtAnyPosition(node* head ,node*ptr,int d, int pos)
+{
+     //insertion at head
+     if(pos==1){
+         ptr->next= head;
+         return ptr;
+     }
+      
+      //insertion at any given point or insertion at last;
+     node* curr = head;
+     for(int i = 1; i<= pos-2 && curr!= NULL; i++){
+         curr = curr->next;
+     } 
+     if(curr == NULL){
+         return head;
+     }
+      ptr->next = curr->next;
+      curr->next = ptr; 
+     return head;
+}
+
+
+
+int main(){
+     
+     int nextElement=1;
+    node* head = NULL;
+     while(nextElement==1){
+         
+         int d;
+         cout<<"Enter data:\n";
+         cin>>d;
+         node* ptr = new node();
+         ptr->data = d;
+         int pos;
+         cout<<"Position at which you want element \n";
+         cin>>pos;
+        
+        int type;
+        cin>>type;
+        
+        head = insertAtAnyPosition(head,ptr, d , pos);
+        
+         printll(head);
+         cout<<"\nTo enter more data press 1:";
+         cin>>nextElement;
+     }
+      
+
+    return 0;
+}
