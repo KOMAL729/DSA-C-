@@ -1,0 +1,81 @@
+//insertion after a particular element 
+#include<iostream>
+using namespace std;
+
+struct node{
+   int data;
+   node* next = NULL;
+};
+
+void printll(node* head){
+    node* ptr = head;
+    while(ptr){
+        cout<<ptr->data<<"-->";
+        ptr = ptr->next;
+    }
+}
+
+node* insertion(node* head, node* ptr){
+    
+    if(head==NULL){
+        head = ptr;
+        return ptr;
+    }
+    else{
+       ptr->next = head;
+       return ptr;
+    }
+}
+
+node* deleteAfterParticularelement(node* head ,int pos){
+
+    if(!head){
+        return 0;
+    }
+    if(head->next == NULL){
+        return head;
+    }
+
+     node* ptr = head;
+     node* curr = head->next;
+      int i=1;
+      while(i<pos){
+        ptr = curr;
+        curr = curr->next;
+        i++; 
+      }
+      ptr->next = curr->next;
+      delete(curr);
+      return head;
+}
+
+
+int main(){
+     int nextElement=1;
+    node* head = NULL;
+     while(nextElement==1){
+         
+         int d;
+         cout<<"Enter data:\n";
+         cin>>d;
+         node* ptr = new node();
+         ptr->data = d;
+         head = insertion(head,ptr);
+         cout<<"LL after insertion"<<endl;
+         printll(head);
+         
+         int pos;
+         cout<<"Position after which you want to delete the element \n";
+         cin>>pos;
+        
+        
+        head = deleteAfterParticularelement(head, pos);
+        
+         printll(head);
+         cout<<"\nTo enter more data press 1:";
+         cin>>nextElement;
+     }
+
+
+    return 0;
+}
