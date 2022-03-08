@@ -1,0 +1,90 @@
+#include<iostream>
+using namespace std;
+
+struct node{
+   int data;
+   node* next = NULL;
+
+};
+void printCLL(node* head){
+    if(!head) return;
+    cout<<(head->data)<<" ";
+    for(node* p = head->next; p!=head ; p = p->next){
+        cout<<p->data<<" ";
+    }
+}
+
+node* InsertionInCircularLL(node* head, node* ptr){
+    if(!head){
+        ptr->next = ptr;
+    }
+    else{
+        node* p = head;
+        while(p->next != head){
+            p = p->next;
+        }
+        ptr->next = head;
+        p->next = ptr;
+    }
+    return ptr;
+}
+node* deleteHead(node* head){
+    if(head->next = head){
+        delete(head);
+        return NULL;
+    }
+    else{
+        node* curr = head;
+        while(curr->next!= head){
+            curr = curr->next;
+        }
+        curr->next = head->next;
+        delete(head);
+        return (curr->next);
+    }
+}
+node* deletionInCircularLL(node* head , int x){
+    if(!head){
+        return NULL;
+    }
+    if(x==1){
+        return deleteHead(head);
+    }
+    node *p = head;
+    for(int i=0; i<(x-2);i++){
+        p = p->next;
+    }
+    node* ptr = p->next;
+    p->next = p->next->next;
+    delete(ptr);
+    return head;
+} 
+
+int main(){
+    node* head = NULL;
+    int nextElement = 1;
+    while(nextElement ==1){
+        int d;
+        cout<<"\n Enter data \n";
+        cin>>d;
+        node* ptr = new node();
+        ptr->data = d;
+        head = InsertionInCircularLL(head , ptr);
+        cout<<"Data after Insertion at head "<<endl;
+        printCLL(head);
+
+        int x;
+        cout<<"Enter the element which you want to delete "<<endl;
+        cin>>x;
+        head = deletionInCircularLL(head, x);
+        cout<<"Data in Linked List: ";
+        printCLL(head);
+        cout<<"To enter more data press 1: ";
+        cin>>nextElement;
+
+    }
+    cout<<"Data in linked list: ";
+    printCLL(head);
+    return 0;
+    
+}
