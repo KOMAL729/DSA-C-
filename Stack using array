@@ -1,0 +1,69 @@
+#include<iostream>
+using namespace std;
+
+struct MyStack{
+    int *arr;
+    int capacity;
+    int top;
+    MyStack(int c){
+        capacity = c;
+        arr = new int[capacity];
+        top = -1;
+     }
+   
+   void push(int x){
+       if(top < capacity-1){ 
+        // top++;
+        // arr[top+1]= x;
+        arr[++top]= x;
+       }
+       else{
+           cout<<"Overflow stack";
+       }
+  
+   }
+   int pop(){
+        if(top>-1){ 
+        //  int res = arr[top--];
+        //  top--;
+         return arr[top--];
+        }
+        else{
+            cout<<"UnderFlow"<<endl;
+        }
+   }
+
+   int Top(){
+       return arr[top];
+   }
+   
+   int size(){
+       return (top+1);
+   }
+   bool isEmpty(){
+       if(top==-1){ 
+           return true;
+       }
+       else{
+           return false;
+       }
+   }
+};
+
+int main(){
+    
+    MyStack s(4);
+    s.push(4);
+    s.push(3);
+    s.push(2);
+    s.push(1);
+    cout<<s.pop()<<endl;
+    cout<<s.size()<<endl;
+    cout<<s.Top()<<endl;
+    cout<<s.isEmpty()<<endl;
+    s.pop();
+    s.pop();
+    s.pop();
+    cout<<s.isEmpty()<<endl;
+    return 0;
+}
