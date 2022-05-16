@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int* q;
+int capacity;
+int cs=0, f= -1, r = -1;
+
+void enqueue(int e){
+    if(cs==capacity){
+        cout<<"overflow";
+        return;
+    }
+    r = (r+1) % capacity;
+    q[r] =e;
+    cs++;
+    if(cs ==1){
+        f = r;
+    }
+     
+}
+void dequeue(){
+       if(cs == 0){
+           cout<<"\n underflow\n";
+           return;
+       }
+       f = (f+1)%capacity;
+       cs--;
+       if(cs==0){
+           r = f=-1;
+       }
+}
+ int frontEle(){
+     if(cs ==0){
+         cout<<"queue is empty \n";
+         return -1;
+     }
+     cout<<"front element in queue : "<<q[f]<<endl;
+     return q[f];
+ }
+
+int main()
+{
+    cout<<"maximum no. of element that can be present in queue.";
+    cin>>capacity;
+    q = new int[capacity];
+
+    int ch =1;
+    while(ch){
+
+        int w;
+        cout<<"\n Enter your choice. press\n1 for enqueue \n2 for dequeue.\n3 for front element.\n";
+        cin>>w;
+
+        if(w==1){
+             cout<<"enter the element u watn to insert :";
+             int e;
+             cin>>e;
+             enqueue(e);
+             
+        }
+        else if(w==2){
+                dequeue();
+        }
+        else if(w==3){
+            int x = frontEle();
+        }
+        else{
+            cout<<"you entered incorrect choice";
+        }
+        cout<<"\nto continue press 1 else come out of loop";
+        cin>>ch;
+    }
+return 0;
+
+}
